@@ -86,8 +86,8 @@ async def check_website_and_notify():
 def run_check():
     asyncio.run(check_website_and_notify())
 
-# Schedule the check to run every hour
-schedule.every(1).hour.do(run_check)
+# Schedule the check to run every 5 minutes
+schedule.every(5).minutes.do(run_check)
 
 # Run the scheduled tasks
 if __name__ == "__main__":
