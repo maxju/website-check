@@ -11,6 +11,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
+import pytz
 
 load_dotenv()
 
@@ -19,6 +20,9 @@ WEBSITE_URL = os.getenv("WEBSITE_URL")
 SEARCH_STRING = os.getenv("SEARCH_STRING")
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHANNEL_ID = os.getenv("TELEGRAM_CHANNEL_ID")
+
+# Set timezone to Berlin
+berlin_tz = pytz.timezone('Europe/Berlin')
 
 # Global variable to store the status message ID
 status_message_id = None
@@ -42,8 +46,8 @@ def get_page_content():
 async def check_website_and_notify():
     global status_message_id
     try:
-        # Get current timestamp
-        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        # Get current timestamp in Berlin timezone
+        current_time = datetime.now(berlin_tz).strftime("%Y-%m-%d %H:%M:%S %Z")
         
         # Fetch the website content using Selenium
         page_content = get_page_content()
@@ -102,8 +106,8 @@ def test_check_website():
     Test function to check the website without sending Telegram messages.
     """
     try:
-        # Get current timestamp
-        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        # Get current timestamp in Berlin timezone
+        current_time = datetime.now(berlin_tz).strftime("%Y-%m-%d %H:%M:%S %Z")
         
         # Fetch the website content using Selenium
         page_content = get_page_content()

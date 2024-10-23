@@ -4,5 +4,7 @@ schedule
 python-dotenv
 selenium
 webdriver_manager
+pytz
+
 
 
